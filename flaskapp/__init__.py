@@ -12,12 +12,20 @@ import os
 
 from flaskapp.forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 
+from dotenv import load_dotenv
+
+
+dotenv_path = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    '.env'
+)
+
+load_dotenv(dotenv_path=dotenv_path, verbose=True)
+
 
 app = Flask(__name__)
 
-# app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
-SECRET_KEY = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
-app.config['SECRET_KEY'] = SECRET_KEY
+app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
 
 ckeditor = CKEditor(app)
 Bootstrap5(app)
@@ -44,11 +52,8 @@ gravatar = Gravatar(app,
 
 
 # CONNECT TO DB
-# SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:Engineer1@blog-db.cvih73rfc0b3.us-east-1.rds.amazonaws.com'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Engineer1@blog-db.cvih73rfc0b3.us-east-1.rds.amazonaws.com'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URI", "sqlite:///posts.db")
 
 db = SQLAlchemy()
 db.init_app(app)

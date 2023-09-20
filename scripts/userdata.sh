@@ -23,7 +23,7 @@ cd /var/www
 git config core.fileMode false
 
 # update me. for storing env variables in s3
-# aws s3 cp s3://korben-bucket/simple-flask/.env .env
+aws s3 cp s3://korben-bucket/blog/.env .env
 
 chmod +x scripts/post_userdata.sh
 
