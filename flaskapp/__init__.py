@@ -10,10 +10,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
 import os
 
-from flaskapp.forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
+from flaskapp.forms import CreatePostForm, RegisterForm, LoginForm, CommentForm, ContactForm
 
 from dotenv import load_dotenv
 
+from flask_mail import Mail, Message
 
 dotenv_path = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
@@ -26,6 +27,15 @@ load_dotenv(dotenv_path=dotenv_path, verbose=True)
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
+
+mail = Mail()
+app.config["MAIL_SERVER"] = "smtp.gmail.com"
+app.config["MAIL_PORT"] = 465
+app.config["MAIL_USE_SSL"] = True
+app.config["MAIL_USERNAME"] = 'ericwnelson84@gmail.com'
+app.config["MAIL_PASSWORD"] = 'vctleaaylxiopnbh'
+
+mail.init_app(app)
 
 ckeditor = CKEditor(app)
 Bootstrap5(app)
@@ -268,9 +278,15 @@ def about():
     return render_template("about.html", current_user=current_user)
 
 
-@app.route("/contact")
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
-    return render_template("contact.html", current_user=current_user)
+    form = ContactForm()
+    if form.validate_on_submit():
+        msg = Message(form.subject.data, sender=form.email.data, recipients=['ericwnelson84@gmail.com'])
+        msg.body = f'A Message from:{form.name.data}, Email: {form.email.data}, Message: {form.message.data}'
+        mail.send(msg)
+        return redirect(url_for('get_all_posts'))
+    return render_template("contact.html", current_user=current_user, form=form)
 
 
 if __name__ == "__main__":
