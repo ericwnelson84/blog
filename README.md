@@ -1,7 +1,7 @@
 # Flask Blog App
 
 
-![Screenshot of site](assets/screenshot.jpg)
+![Screenshot of site](assets/screenshot1.jpg)
 
 
 
