@@ -70,8 +70,6 @@ Resources:
           git clone https://git-codecommit.us-east-1.amazonaws.com/v1/repos/blog /var/www
           cd /var/www
           git config core.fileMode false
-          # update me. for storing env variables in s3
-          # aws s3 cp s3://korben-bucket/simple-flask/.env .env
           chmod +x scripts/post_userdata.sh
           ./scripts/post_userdata.sh
 
