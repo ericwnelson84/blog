@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 set -e # stop the execution of the script if it fails
 
-CFN_PATH="/workspace/personal-site-with-Flask/cfn/template.yaml"
+CFN_PATH="/workspace/Flask-blog/cfn/template.yaml"
 
 echo $CFN_PATH
 
@@ -9,12 +9,12 @@ echo $CFN_PATH
 
 
 aws cloudformation deploy \
-  --stack-name "personal-site" \
+  --stack-name "blog-site" \
   --s3-bucket "cfn-artifacts-ewn" \
-  --s3-prefix "personal-site" \
+  --s3-prefix "blog-site" \
   --region "us-east-1" \
   --template-file "$CFN_PATH" \
-  --tags group="personal-site" \
+  --tags group="blog-site" \
   --capabilities CAPABILITY_NAMED_IAM 
 
-  # --no-execute-changeset \
+#   # --no-execute-changeset \

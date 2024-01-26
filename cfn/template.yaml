@@ -13,7 +13,7 @@ Parameters:
   DomainName:
     Type: String
     Description: The domain name for the Route 53 record
-    Default: ericwnelson.info
+    Default: blog.ericwnelson.info
   HostedZoneId:
     Type: AWS::Route53::HostedZone::Id
     Description: The ID of the hosted zone
@@ -50,6 +50,8 @@ Resources:
       SubnetId: !Select [0, !Ref SubnetId]
       SecurityGroupIds: 
         - !GetAtt EC2SecurityGroup.GroupId
+        - sg-0d61e410a002a4158
+        - sg-05a5cebab93f54e72
       UserData:
         Fn::Base64: |
           #!/bin/bash
@@ -65,7 +67,7 @@ Resources:
           aws configure set region us-east-1
           mkdir -p /var/www
           # update me
-          git clone https://git-codecommit.us-east-1.amazonaws.com/v1/repos/personal-site /var/www
+          git clone https://git-codecommit.us-east-1.amazonaws.com/v1/repos/blog /var/www
           cd /var/www
           git config core.fileMode false
           # update me. for storing env variables in s3
@@ -158,8 +160,6 @@ Resources:
       VpcId: !Ref VPCId
       Targets:
         - Id: !Ref EC2Instance
-
-
 
   Route53RecordSet:
     Type: AWS::Route53::RecordSet
