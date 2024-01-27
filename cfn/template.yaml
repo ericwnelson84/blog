@@ -33,7 +33,7 @@ Parameters:
   Image:
     Type: String
     Description: AMI image id
-    Default: ami-053b0d53c279acc90
+    Default: ami-00c6177f250e07ec1
   EC2RoleName:
       Type: String
       Description: The name of the existing IAM role to assign to the EC2 instance
