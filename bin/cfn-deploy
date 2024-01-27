@@ -5,7 +5,7 @@ CFN_PATH="/workspace/Flask-blog/cfn/template.yaml"
 
 echo $CFN_PATH
 
-# aws cloudformation validate-template --template-body file://$CFN_PATH
+# aws cloudformation validate-template --template-body file://$CFN_PATH --region "us-east-1"
 
 
 aws cloudformation deploy \
@@ -17,4 +17,4 @@ aws cloudformation deploy \
   --tags group="blog-site" \
   --capabilities CAPABILITY_NAMED_IAM 
 
-#   # --no-execute-changeset \
+# #   # --no-execute-changeset \

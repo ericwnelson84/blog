@@ -34,10 +34,6 @@ Parameters:
     Type: String
     Description: AMI image id
     Default: ami-00c6177f250e07ec1
-  EC2RoleName:
-      Type: String
-      Description: The name of the existing IAM role to assign to the EC2 instance
-      Default: ec2-s3-codecommit-read-only-role
 
 Resources:
   EC2Instance:
@@ -105,7 +101,45 @@ Resources:
     Type: AWS::IAM::InstanceProfile
     Properties:
       Roles:
-        - !Ref EC2RoleName
+        - !Ref EC2Role
+
+  EC2Role:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: BlogEC2Role
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: 'Allow'
+            Principal:
+              Service: 'ecs-tasks.amazonaws.com'
+            Action: 'sts:AssumeRole'
+      Policies:
+        - PolicyName: 'Blog-EC2'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Sid: 'VisualEditor0'
+                Effect: 'Allow'
+                Action:
+                  - ssmmessages:CreateControlChannel
+                  - ssmmessages:CreateDataChannel
+                  - ssmmessages:OpenControlChannel
+                  - ssmmessages:OpenDataChannel
+                  - s3:Get*
+                  - s3:List*
+                  - s3:Describe*
+                  - s3-object-lambda:Get*
+                  - codecommit:BatchGet*
+                  - codecommit:BatchDescribe*
+                  - codecommit:Describe*
+                  - codecommit:EvaluatePullRequestApprovalRules
+                  - codecommit:Get*
+                  - codecommit:List*
+                  - codecommit:GitPull
+                Resource: '*'
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
 
   ALBSG:
     Type: AWS::EC2::SecurityGroup
