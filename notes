@@ -1,1 +1,6 @@
 git config --get remote.origin.url
+
+
+• The important thing to pass is the entire script through the function
+Fn::Base64
+• Good to know: user data script log is in /var/log/cloud-init-output.log
