@@ -18,3 +18,4 @@ tasks:
       clear
     command: |
       export GITPOD_IP=$(curl ifconfig.me)
+      clear
