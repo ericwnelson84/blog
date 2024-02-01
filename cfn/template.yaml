@@ -63,7 +63,7 @@ Resources:
           git config --system credential.https://git-codecommit.us-east-1.amazonaws.com.UseHttpPath true
           aws configure set region us-east-1
           mkdir -p /var/www
-          git clone https://github.com/ericwnelson84/personal-site-with-Flask.git /var/www
+          git clone https://github.com/ericwnelson84/Flask-blog.git /var/www
           cd /var/www
           git config core.fileMode false
           aws s3 cp s3://korben-bucket/blog/.env .env
