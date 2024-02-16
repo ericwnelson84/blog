@@ -3,6 +3,18 @@
 
 node_modules
 
+
 build.toml
 packaged.yaml
 tmp/*
+
+venv
+*.venv
+flaskapp/__pycache__
+
+.cpython
+.pyc
+
+__init__.cpython-312.pyc
+
+__pycache__
