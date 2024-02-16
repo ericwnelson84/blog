@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: CloudFormation template to deploy an EC2 instance behind an ALB with SSL, Route 53, and CodeCommit integration.
+Description: CloudFormation template to deploy an EC2 instance behind an ALB with SSL, Route 53, repo with Github
 
 Parameters:
   VPCId:

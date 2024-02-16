@@ -129,7 +129,9 @@ def admin_only(f):
         return f(*args, **kwargs)
 
     return decorated_function
-
+@app.route('/health-check')
+def health_check():
+    return {'success': True, 'ver': 1}, 200
 
 # Register new users into the User database
 @app.route('/register', methods=["GET", "POST"])
