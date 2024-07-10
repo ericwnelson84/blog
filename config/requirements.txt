@@ -12,3 +12,4 @@ WTForms==3.0.1
 SQLAlchemy==2.0.19
 psycopg2-binary==2.9.6
 uwsgi
+zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
